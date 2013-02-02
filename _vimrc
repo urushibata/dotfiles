@@ -48,13 +48,13 @@ endif
 set nowritebackup
 "バックアップ/スワップファイルを作成する/しない
 set nobackup
-set noswapfile
+"set noswapfile
 "再読込、vim終了後も継続するアンドゥ(7.3)
 if version >= 703
   "Persistent undoを有効化(7.3)
   set undofile
   "アンドゥの保存場所(7.3)
-  set undodir=.
+  set undodir=C://home/tmp/vim/.
 endif
 "viminfoを作成しない
 "set viminfo=
