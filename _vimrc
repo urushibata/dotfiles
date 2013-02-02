@@ -117,7 +117,7 @@ set visualbell t_vb=
 "マクロ実行中などの画面再描画を行わない
 "set lazyredraw
 "Windowsでディレクトリパスの区切り文字表示に / を使えるようにする
-set shellslash
+"set shellslash
 "行番号表示
 set number
 "括弧の対応表示時間
