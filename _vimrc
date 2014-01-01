@@ -350,28 +350,6 @@ endif
 "----------------------------------------
 " 各種プラグイン設定
 "----------------------------------------
-"set nocompatible
-"filetype off
-"
-"if has('win32') || has('win64')
-"  set rtp+=$HOME/dotfiles/vimfiles/vundle.git/
-"  let $DOTVIM = expand('$HOME/dotfiles/vimfiles/bundle')
-"else
-"  let $DOTVIM = expand('~/.vim')
-"endif
-"
-"call vundle#rc('$DOTVIM')
-"
-"Bundle 'gmarik/vundle'
-"Bundle 'surround.vim'
-"Bundle 'ref.vim'
-"Bundle 'petdance/vim-perl'
-"Bundle 'vim-perl'
-"Bundle 'hotchpotch/perldoc-vim'
-"Bundle 'thinca/vim-quickrun'
-"
-"filetype plugin indent on
-
 set nocompatible               " Be iMproved
 filetype off
 
@@ -400,6 +378,7 @@ NeoBundle 'ref.vim'
 NeoBundle 'petdance/vim-perl'
 NeoBundle 'hotchpotch/perldoc-vim'
 NeoBundle 'thinca/vim-quickrun'
+NeoBundle 'petdance/vim-perl'
 
 syntax on
 filetype on
@@ -494,6 +473,10 @@ endif
 " https://github.com/c9s/perlomni.vim
 let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
 
+"----------------------------------------
+" vim-quickrun
+"----------------------------------------
+nmap <Leader>r <plug>(quickrun)
 
 "----------------------------------------
 " 一時設定
