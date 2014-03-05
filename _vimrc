@@ -87,6 +87,8 @@ if has('mouse')
 endif
 "pluginÇégópâ¬î\Ç…Ç∑ÇÈ
 filetype plugin indent on
+" netrw is always tree view
+let g:netrw_liststyle = 3
 
 "----------------------------------------
 " åüçı
@@ -371,14 +373,15 @@ endif
 " Let NeoBundle manage NeoBundle
 NeoBundleFetch 'Shougo/neobundle.vim'
 NeoBundle 'Shougo/vimproc'
+NeoBundle 'Shougo/unite.vim'
 
 NeoBundle 'neocomplete.vim'
 NeoBundle 'surround.vim'
 NeoBundle 'ref.vim'
+NeoBundle 'thinca/vim-quickrun'
+
 NeoBundle 'petdance/vim-perl'
 NeoBundle 'hotchpotch/perldoc-vim'
-NeoBundle 'thinca/vim-quickrun'
-NeoBundle 'petdance/vim-perl'
 
 syntax on
 filetype on
