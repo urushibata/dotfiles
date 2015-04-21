@@ -3,4 +3,4 @@
 *.log
 *_
 *.org
-vimfiles/bundle/
+bundle/
