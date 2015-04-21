@@ -89,6 +89,8 @@ endif
 filetype plugin indent on
 " netrw is always tree view
 let g:netrw_liststyle = 3
+" 印刷改ページ
+set printoptions+=formfeed:y
 
 "----------------------------------------
 " 検索
@@ -107,6 +109,8 @@ set hlsearch
 "set iskeyword=a-z,A-Z,48-57,_,.,-,>
 "vimgrep をデフォルトのgrepとする場合internal
 "set grepprg=internal
+set grepprg=grep.exe\ -nH
+au QuickfixCmdPost grep copen
 
 "----------------------------------------
 " 表示設定
@@ -120,7 +124,7 @@ set visualbell t_vb=
 "マクロ実行中などの画面再描画を行わない
 "set lazyredraw
 "Windowsでディレクトリパスの区切り文字表示に / を使えるようにする
-"set shellslash
+set shellslash
 "行番号表示
 set number
 "括弧の対応表示時間
@@ -151,7 +155,7 @@ endif
 
 "色テーマ設定
 "gvimの色テーマは.gvimrcで指定する
-colorscheme default
+"colorscheme default
 
 """"""""""""""""""""""""""""""
 "ステータスラインに文字コードやBOM、16進表示等表示
@@ -353,14 +357,14 @@ endif
 " 各種プラグイン設定
 "----------------------------------------
 set nocompatible               " Be iMproved
-filetype off
+filetype plugin indent off
 
 if has('vim_starting')
-  set runtimepath+=$HOME/dotfiles/vimfiles/bundle/neobundle.vim
-  let $DOTVIM = expand('$HOME/dotfiles/vimfiles/bundle')
+  set runtimepath+=$HOME/dotfiles/vimfiles/bundle/neobundle.vim/
+  let $DOTVIM = expand('$HOME/dotfiles/vimfiles/bundle/')
 endif
 
-call neobundle#rc('$DOTVIM')
+call neobundle#begin('$DOTVIM')
 
 " Installation check.
 if neobundle#exists_not_installed_bundles()
@@ -375,13 +379,15 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 NeoBundle 'Shougo/vimproc'
 NeoBundle 'Shougo/unite.vim'
 
-NeoBundle 'neocomplete.vim'
+NeoBundle 'Shougo/neocomplete.vim'
 NeoBundle 'surround.vim'
 NeoBundle 'ref.vim'
 NeoBundle 'thinca/vim-quickrun'
 
 NeoBundle 'petdance/vim-perl'
 NeoBundle 'hotchpotch/perldoc-vim'
+
+call neobundle#end()
 
 syntax on
 filetype on
@@ -428,6 +434,7 @@ function! s:my_cr_function()
   " For no inserting <CR> key.
   "return pumvisible() ? neocomplete#close_popup() : "\<CR>"
 endfunction
+
 " <TAB>: completion.
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 " <C-h>, <BS>: close popup and delete backword char.
@@ -435,27 +442,6 @@ inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
 inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
 inoremap <expr><C-y>  neocomplete#close_popup()
 inoremap <expr><C-e>  neocomplete#cancel_popup()
-" Close popup by <Space>.
-"inoremap <expr><Space> pumvisible() ? neocomplete#close_popup() : "\<Space>"
-
-" For cursor moving in insert mode(Not recommended)
-"inoremap <expr><Left>  neocomplete#close_popup() . "\<Left>"
-"inoremap <expr><Right> neocomplete#close_popup() . "\<Right>"
-"inoremap <expr><Up>    neocomplete#close_popup() . "\<Up>"
-"inoremap <expr><Down>  neocomplete#close_popup() . "\<Down>"
-" Or set this.
-"let g:neocomplete#enable_cursor_hold_i = 1
-" Or set this.
-"let g:neocomplete#enable_insert_char_pre = 1
-
-"AutoComplPop like behavior.
-"let g:neocomplete#enable_auto_select = 1
-
-" Shell like behavior(not recommended).
-"set completeopt+=longest
-"let g:neocomplete#enable_auto_select = 1
-"let g:neocomplete#disable_auto_complete = 1
-"inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
 
 " Enable omni completion.
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
