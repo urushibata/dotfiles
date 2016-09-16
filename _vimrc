@@ -1,404 +1,309 @@
-set nocompatible
-scriptencoding cp932
-"scriptencoding‚ÆA‚±‚Ìƒtƒ@ƒCƒ‹‚ÌƒGƒ“ƒR[ƒfƒBƒ“ƒO‚ªˆê’v‚·‚é‚æ‚¤’ˆÓI
-"scriptencoding‚ÍAvim‚Ì“à•”ƒGƒ“ƒR[ƒfƒBƒ“ƒO‚Æ“¯‚¶‚à‚Ì‚ğ„§‚µ‚Ü‚·B
-"‰üsƒR[ƒh‚Í set fileformat=unix ‚Éİ’è‚·‚é‚Æunix‚Å‚àg‚¦‚Ü‚·B
-
-"----------------------------------------
-" ƒ†[ƒU[ƒ‰ƒ“ƒ^ƒCƒ€ƒpƒXİ’è
-"----------------------------------------
-"Windows, unix‚Å‚Ìruntimepath‚Ìˆá‚¢‚ğ‹zû‚·‚é‚½‚ß‚Ì‚à‚ÌB 
-"$MY_VIMRUNTIME‚Íƒ†[ƒU[ƒ‰ƒ“ƒ^ƒCƒ€ƒfƒBƒŒƒNƒgƒŠ‚ğ¦‚·B 
-":echo $MY_VIMRUNTIME‚ÅÀÛ‚ÌƒpƒX‚ğŠm”F‚Å‚«‚Ü‚·B 
-if isdirectory($HOME . '/.vim') 
-  let $MY_VIMRUNTIME = $HOME.'/.vim' 
-elseif isdirectory($HOME . '\vimfiles') 
-  let $MY_VIMRUNTIME = $HOME.'\vimfiles' 
-elseif isdirectory($VIM . '\vimfiles') 
-  let $MY_VIMRUNTIME = $VIM.'\vimfiles' 
-endif 
-"ƒ‰ƒ“ƒ^ƒCƒ€ƒpƒX‚ğ’Ê‚·•K—v‚Ì‚ ‚éƒvƒ‰ƒOƒCƒ“‚ğg—p‚·‚éê‡
-"$MY_VIMRUNTIME‚ğg—p‚·‚é‚Æ Windows/Linux‚ÅØ‚è•ª‚¯‚é•K—v‚ª–³‚­‚È‚è‚Ü‚·B 
-"—á) vimfiles/qfixapp (Linux‚Å‚Í~/.vim/qfixapp)‚Éƒ‰ƒ“ƒ^ƒCƒ€ƒpƒX‚ğ’Ê‚·ê‡ 
-"set runtimepath+=$MY_VIMRUNTIME/qfixapp
-
-"----------------------------------------
-" “à•”ƒGƒ“ƒR[ƒfƒBƒ“ƒOw’è
-"----------------------------------------
-"“à•”ƒGƒ“ƒR[ƒfƒBƒ“ƒO‚ÌUTF-8‰»‚Æ•¶šƒR[ƒh‚Ì©“®”F¯İ’è‚ğencode.vim‚Ås‚¤B
-"ƒI[ƒ‹ƒCƒ“ƒƒ“ƒpƒbƒP[ƒW‚Ìê‡ vimrc‚Åİ’è‚³‚ê‚Ä‚¢‚é‚Ì‚Å‰½‚à‚µ‚È‚¢B
-"ƒGƒ“ƒR[ƒfƒBƒ“ƒOw’è‚â•¶šƒR[ƒh‚Ì©“®”F¯İ’è‚ª“KØ‚Éİ’è‚³‚ê‚Ä‚¢‚éê‡A
-"Ÿs‚Ì encode.vim“Ç•”•ª‚ÍƒRƒƒ“ƒgƒAƒEƒg‚µ‚Ä‰º‚³‚¢Buencode.vim‚É‚Â‚¢‚Äv
-"silent! source $MY_VIMRUNTIME/pluginjp/encode.vim
-
-"scriptencoding‚ÆˆÙ‚È‚é“à•”ƒGƒ“ƒR[ƒfƒBƒ“ƒO‚É•ÏX‚·‚éê‡A
-"•ÏXŒã‚É‚àscriptencoding‚ğw’è‚µ‚Ä‚¨‚­‚Æ–â‘è‚ª‹N‚«‚É‚­‚­‚È‚è‚Ü‚·B
-"scriptencoding cp932
-
-"----------------------------------------
-" ƒVƒXƒeƒ€İ’è
-"----------------------------------------
-"mswin.vim‚ğ“Ç‚İ‚Ş
-"source $VIMRUNTIME/mswin.vim
-"behave mswin
-
-"ƒtƒ@ƒCƒ‹‚Ìã‘‚«‚Ì‘O‚ÉƒoƒbƒNƒAƒbƒv‚ğì‚é/ì‚ç‚È‚¢
-"set writebackup‚ğw’è‚µ‚Ä‚àƒIƒvƒVƒ‡ƒ“ 'backup' ‚ªƒIƒ“‚Å‚È‚¢ŒÀ‚èA
-"ƒoƒbƒNƒAƒbƒv‚Íã‘‚«‚É¬Œ÷‚µ‚½Œã‚Éíœ‚³‚ê‚éB
-set nowritebackup
-"ƒoƒbƒNƒAƒbƒv/ƒXƒƒbƒvƒtƒ@ƒCƒ‹‚ğì¬‚·‚é/‚µ‚È‚¢
-set nobackup
-"set noswapfile
-"Ä“ÇAvimI—¹Œã‚àŒp‘±‚·‚éƒAƒ“ƒhƒD(7.3)
-if version >= 703
-  "Persistent undo‚ğ—LŒø‰»(7.3)
-  set undofile
-  "ƒAƒ“ƒhƒD‚Ì•Û‘¶êŠ(7.3)
-  set undodir=C://usr/tmp/vim/.
-endif
-
-"viminfo‚ğì¬‚µ‚È‚¢
-"set viminfo=
-"ƒNƒŠƒbƒvƒ{[ƒh‚ğ‹¤—L
-set clipboard+=unnamed
-"8i”‚ğ–³Œø‚É‚·‚éB<C-a>,<C-x>‚É‰e‹¿‚·‚é
-set nrformats-=octal
-"ƒL[ƒR[ƒh‚âƒ}ƒbƒsƒ“ƒO‚³‚ê‚½ƒL[—ñ‚ªŠ®—¹‚·‚é‚Ì‚ğ‘Ò‚ÂŠÔ(ƒ~ƒŠ•b)
-set timeoutlen=3500
-"•ÒWŒ‹‰Ê”ñ•Û‘¶‚Ìƒoƒbƒtƒ@‚©‚çAV‚µ‚¢ƒoƒbƒtƒ@‚ğŠJ‚­‚Æ‚«‚ÉŒx‚ğo‚³‚È‚¢
-set hidden
-"ƒqƒXƒgƒŠ‚Ì•Û‘¶”
-set history=50
-"“ú–{Œê‚Ìs‚Ì˜AŒ‹‚É‚Í‹ó”’‚ğ“ü—Í‚µ‚È‚¢
-set formatoptions+=mM
-"Visual blockƒ‚[ƒh‚ÅƒtƒŠ[ƒJ[ƒ\ƒ‹‚ğ—LŒø‚É‚·‚é
-set virtualedit=block
-"ƒJ[ƒ\ƒ‹ƒL[‚Ås––^s“ª‚ÌˆÚ“®‰Â”\‚Éİ’è
-set whichwrap=b,s,[,],<,>
-"ƒoƒbƒNƒXƒy[ƒX‚ÅƒCƒ“ƒfƒ“ƒg‚â‰üs‚ğíœ‚Å‚«‚é‚æ‚¤‚É‚·‚é
-set backspace=indent,eol,start
-" ‚â›‚Ì•¶š‚ª‚ ‚Á‚Ä‚àƒJ[ƒ\ƒ‹ˆÊ’u‚ª‚¸‚ê‚È‚¢‚æ‚¤‚É‚·‚é
-set ambiwidth=double
-"ƒRƒ}ƒ“ƒhƒ‰ƒCƒ“•âŠ®‚·‚é‚Æ‚«‚É‹­‰»‚³‚ê‚½‚à‚Ì‚ğg‚¤
-set wildmenu
-"ƒ}ƒEƒX‚ğ—LŒø‚É‚·‚é
-if has('mouse')
-  set mouse=a
-endif
-"plugin‚ğg—p‰Â”\‚É‚·‚é
-filetype plugin indent on
-" netrw is always tree view
-let g:netrw_liststyle = 3
-" ˆóü‰üƒy[ƒW
-set printoptions+=formfeed:y
-
-"----------------------------------------
-" ŒŸõ
-"----------------------------------------
-"ŒŸõ‚Ì‚É‘å•¶š¬•¶š‚ğ‹æ•Ê‚µ‚È‚¢
-"‚½‚¾‚µ‘å•¶š¬•¶š‚Ì—¼•û‚ªŠÜ‚Ü‚ê‚Ä‚¢‚éê‡‚Í‘å•¶š¬•¶š‚ğ‹æ•Ê‚·‚é
-set ignorecase
-set smartcase
-"ŒŸõ‚Éƒtƒ@ƒCƒ‹‚ÌÅŒã‚Ü‚Ås‚Á‚½‚çÅ‰‚É–ß‚é
-set wrapscan
-"ƒCƒ“ƒNƒŠƒƒ“ƒ^ƒ‹ƒT[ƒ`
-set incsearch
-"ŒŸõ•¶š‚Ì‹­’²•\¦
-set hlsearch
-"w,b‚ÌˆÚ“®‚Å”F¯‚·‚é•¶š
-"set iskeyword=a-z,A-Z,48-57,_,.,-,>
-"vimgrep ‚ğƒfƒtƒHƒ‹ƒg‚Ìgrep‚Æ‚·‚éê‡internal
-"set grepprg=internal
-set grepprg=grep.exe\ -nH
-au QuickfixCmdPost grep copen
-
-"----------------------------------------
-" •\¦İ’è
-"----------------------------------------
-"ƒXƒvƒ‰ƒbƒVƒ…(‹N“®‚ÌƒƒbƒZ[ƒW)‚ğ•\¦‚µ‚È‚¢
-"set shortmess+=I
-"ƒGƒ‰[‚Ì‰¹‚ÆƒrƒWƒ…ƒAƒ‹ƒxƒ‹‚Ì—}§(gvim‚Í.gvimrc‚Åİ’è)
-set noerrorbells
-set novisualbell
-set visualbell t_vb=
-"ƒ}ƒNƒÀs’†‚È‚Ç‚Ì‰æ–ÊÄ•`‰æ‚ğs‚í‚È‚¢
-"set lazyredraw
-"Windows‚ÅƒfƒBƒŒƒNƒgƒŠƒpƒX‚Ì‹æØ‚è•¶š•\¦‚É / ‚ğg‚¦‚é‚æ‚¤‚É‚·‚é
-set shellslash
-"s”Ô†•\¦
-set number
-"Š‡ŒÊ‚Ì‘Î‰•\¦ŠÔ
-set showmatch matchtime=1
-"ƒ^ƒu‚ğİ’è
-set ts=4 sw=4 sts=4
-"©“®“I‚ÉƒCƒ“ƒfƒ“ƒg‚·‚é
-set autoindent
-"CƒCƒ“ƒfƒ“ƒg‚Ìİ’è
-set cinoptions+=:0
-"ƒ^ƒCƒgƒ‹‚ğ•\¦
-set title
-"ƒRƒ}ƒ“ƒhƒ‰ƒCƒ“‚Ì‚‚³ (gvim‚Ígvimrc‚Åw’è)
-set cmdheight=2
-set laststatus=2
-"ƒRƒ}ƒ“ƒh‚ğƒXƒe[ƒ^ƒXs‚É•\¦
-set showcmd
-"‰æ–ÊÅŒã‚Ìs‚ğ‚Å‚«‚éŒÀ‚è•\¦‚·‚é
-set display=lastline
-"TabAs––‚Ì”¼ŠpƒXƒy[ƒX‚ğ–¾¦“I‚É•\¦‚·‚é
-set list
-set listchars=tab:^\ ,trail:~
-
-" ƒnƒCƒ‰ƒCƒg‚ğ—LŒø‚É‚·‚é
-if &t_Co > 2 || has('gui_running')
-  syntax on
-endif
-
-"Fƒe[ƒ}İ’è
-"gvim‚ÌFƒe[ƒ}‚Í.gvimrc‚Åw’è‚·‚é
-"colorscheme default
-
-""""""""""""""""""""""""""""""
-"ƒXƒe[ƒ^ƒXƒ‰ƒCƒ“‚É•¶šƒR[ƒh‚âBOMA16i•\¦“™•\¦
-"iconv‚ªg—p‰Â”\‚Ìê‡AƒJ[ƒ\ƒ‹ã‚Ì•¶šƒR[ƒh‚ğƒGƒ“ƒR[ƒh‚É‰‚¶‚½•\¦‚É‚·‚éFencB()‚ğg—p
-""""""""""""""""""""""""""""""
-if has('iconv')
-  set statusline=%<%f\ %m\ %r%h%w%{'['.(&fenc!=''?&fenc:&enc).(&bomb?':BOM':'').']['.&ff.']'}%=[0x%{FencB()}]\ (%v,%l)/%L%8P\ 
-else
-  set statusline=%<%f\ %m\ %r%h%w%{'['.(&fenc!=''?&fenc:&enc).(&bomb?':BOM':'').']['.&ff.']'}%=\ (%v,%l)/%L%8P\ 
-endif
-
-function! FencB()
-  let c = matchstr(getline('.'), '.', col('.') - 1)
-  let c = iconv(c, &enc, &fenc)
-  return s:Byte2hex(s:Str2byte(c))
-endfunction
-
-function! s:Str2byte(str)
-  return map(range(len(a:str)), 'char2nr(a:str[v:val])')
-endfunction
-
-function! s:Byte2hex(bytes)
-  return join(map(copy(a:bytes), 'printf("%02X", v:val)'), '')
-endfunction
-
-"----------------------------------------
-" diff/patch
-"----------------------------------------
-" diff‚Ìİ’è
-if has('win95') || has('win16') || has('win32') || has('win64')
-  set diffexpr=MyDiff()
-  function! MyDiff()
-    silent! let saved_sxq=&shellxquote
-    silent! set shellxquote=
-    let opt = '-a --binary '
-    if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
-    if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
-    let arg1 = v:fname_in
-    if arg1 =~ ' ' | let arg1 = '"' . arg1 . '"' | endif
-    let arg2 = v:fname_new
-    if arg2 =~ ' ' | let arg2 = '"' . arg2 . '"' | endif
-    let arg3 = v:fname_out
-    if arg3 =~ ' ' | let arg3 = '"' . arg3 . '"' | endif
-    " let cmd = '!diff ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3
-    let cmd = '!""' . $VIM . '\diff" ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3 . '"'
-    silent exe cmd
-    silent! let &shellxquote = saved_sxq
-  endfunction
-endif
-"Œ»ƒoƒbƒtƒ@‚Ì·•ª•\¦(•ÏX‰ÓŠ‚Ì•\¦)
-command! DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis | wincmd p | diffthis
-"ƒtƒ@ƒCƒ‹‚Ü‚½‚Íƒoƒbƒtƒ@”Ô†‚ğw’è‚µ‚Ä·•ª•\¦B#‚È‚ç— ƒoƒbƒtƒ@‚Æ”äŠr
-command! -nargs=? -complete=file Diff if '<args>'=='' | browse vertical diffsplit|else| vertical diffsplit <args>|endif
-"ƒpƒbƒ`ƒRƒ}ƒ“ƒh
-set patchexpr=MyPatch()
-function! MyPatch()
-   :call system($VIM."\\'.'patch -o " . v:fname_out . " " . v:fname_in . " < " . v:fname_diff)
-endfunction
-
-"----------------------------------------
-" ƒm[ƒ}ƒ‹ƒ‚[ƒh
-"----------------------------------------
-"ƒwƒ‹ƒvŒŸõ
-nnoremap <F1> K
-"Œ»İŠJ‚¢‚Ä‚¢‚évimƒXƒNƒŠƒvƒgƒtƒ@ƒCƒ‹‚ğÀs
-nnoremap <F8> :source %<CR>
-"‹­§‘S•Û‘¶I—¹‚ğ–³Œø‰»
-nnoremap ZZ <Nop>
-"ƒJ[ƒ\ƒ‹‚ğj k ‚Å‚Í•\¦s‚ÅˆÚ“®‚·‚éB•¨—sˆÚ“®‚Í<C-n>,<C-p>
-"ƒL[ƒ{[ƒhƒ}ƒNƒ‚É‚Í•¨—sˆÚ“®‚ğ„§
-"h l ‚Íƒm[ƒ}ƒ‹ƒ‚[ƒh‚Ì‚İs––As“ª‚ğ’´‚¦‚é‚±‚Æ‚ª‰Â”\‚Éİ’è(whichwrap) 
-" zv‚ÍƒJ[ƒ\ƒ‹ˆÊ’u‚ÌÜ‚èô‚İ‚ğŠJ‚­ƒRƒ}ƒ“ƒh
-nnoremap <Down> gj
-nnoremap <Up>   gk
-nnoremap h <Left>zv
-nnoremap j gj
-nnoremap k gk
-nnoremap l <Right>zv
-
-"----------------------------------------
-" ‘}“üƒ‚[ƒh
-"----------------------------------------
-
-"----------------------------------------
-" ƒrƒWƒ…ƒAƒ‹ƒ‚[ƒh
-"----------------------------------------
-
-"----------------------------------------
-" ƒRƒ}ƒ“ƒhƒ‚[ƒh
-"----------------------------------------
-
-"----------------------------------------
-" VimƒXƒNƒŠƒvƒg
-"----------------------------------------
-""""""""""""""""""""""""""""""
-"ƒtƒ@ƒCƒ‹‚ğŠJ‚¢‚½‚ç‘O‰ñ‚ÌƒJ[ƒ\ƒ‹ˆÊ’u‚ÖˆÚ“®
-""""""""""""""""""""""""""""""
-augroup vimrcEx
-  autocmd!
-  autocmd BufReadPost *
-    \ if line("'\"") > 1 && line("'\"") <= line('$') |
-    \   exe "normal! g`\"" |
-    \ endif
-augroup END
-
-""""""""""""""""""""""""""""""
-"‘}“üƒ‚[ƒhAƒXƒe[ƒ^ƒXƒ‰ƒCƒ“‚ÌF‚ğ•ÏX
-""""""""""""""""""""""""""""""
-let g:hi_insert = 'highlight StatusLine guifg=darkblue guibg=darkyellow gui=none ctermfg=blue ctermbg=yellow cterm=none'
-
-if has('syntax')
-  augroup InsertHook
-    autocmd!
-    autocmd InsertEnter * call s:StatusLine('Enter')
-    autocmd InsertLeave * call s:StatusLine('Leave')
-  augroup END
-endif
-" if has('unix') && !has('gui_running')
-"   " ESC‚ÅƒL[“ü—Í‘Ò‚¿‚É‚È‚é‘Îô
-"   inoremap <silent> <ESC> <ESC>
-" endif
-
-let s:slhlcmd = ''
-function! s:StatusLine(mode)
-  if a:mode == 'Enter'
-    silent! let s:slhlcmd = 'highlight ' . s:GetHighlight('StatusLine')
-    silent exec g:hi_insert
-  else
-    highlight clear StatusLine
-    silent exec s:slhlcmd
-    redraw
-  endif
-endfunction
-
-function! s:GetHighlight(hi)
-  redir => hl
-  exec 'highlight '.a:hi
-  redir END
-  let hl = substitute(hl, '[\r\n]', '', 'g')
-  let hl = substitute(hl, 'xxx', '', '')
-  return hl
-endfunction
-
-""""""""""""""""""""""""""""""
-"‘SŠpƒXƒy[ƒX‚ğ•\¦
-""""""""""""""""""""""""""""""
-"ƒRƒƒ“ƒgˆÈŠO‚Å‘SŠpƒXƒy[ƒX‚ğw’è‚µ‚Ä‚¢‚é‚Ì‚ÅAscriptencoding‚ÆA
-"‚±‚Ìƒtƒ@ƒCƒ‹‚ÌƒGƒ“ƒR[ƒh‚ªˆê’v‚·‚é‚æ‚¤’ˆÓI
-"‹­’²•\¦‚³‚ê‚È‚¢ê‡A‚±‚±‚Åscriptencoding‚ğw’è‚·‚é‚Æ‚¤‚Ü‚­‚¢‚­–‚ª‚ ‚è‚Ü‚·B
-"scriptencoding cp932
-
-"ƒfƒtƒHƒ‹ƒg‚ÌZenkakuSpace‚ğ’è‹`
-function! ZenkakuSpace()
-  highlight ZenkakuSpace cterm=underline ctermfg=darkgrey gui=underline guifg=darkgrey
-endfunction
-
-if has('syntax')
-  augroup ZenkakuSpace
-    autocmd!
-    " ZenkakuSpace‚ğƒJƒ‰[ƒtƒ@ƒCƒ‹‚Åİ’è‚·‚é‚È‚çŸ‚Ìs‚Ííœ
-    autocmd ColorScheme       * call ZenkakuSpace()
-    " ‘SŠpƒXƒy[ƒX‚ÌƒnƒCƒ‰ƒCƒgw’è
-    autocmd VimEnter,WinEnter * match ZenkakuSpace /@/
-  augroup END
-  call ZenkakuSpace()
-endif
-
-""""""""""""""""""""""""""""""
-"grep,tags‚Ì‚½‚ßƒJƒŒƒ“ƒgƒfƒBƒŒƒNƒgƒŠ‚ğƒtƒ@ƒCƒ‹‚Æ“¯‚¶ƒfƒBƒŒƒNƒgƒŠ‚ÉˆÚ“®‚·‚é
-""""""""""""""""""""""""""""""
-"if exists('+autochdir')
-"  "autochdir‚ª‚ ‚éê‡ƒJƒŒƒ“ƒgƒfƒBƒŒƒNƒgƒŠ‚ğˆÚ“®
-"  set autochdir
-"else
-"  "autochdir‚ª‘¶İ‚µ‚È‚¢‚ªAƒJƒŒƒ“ƒgƒfƒBƒŒƒNƒgƒŠ‚ğˆÚ“®‚µ‚½‚¢ê‡
-"  au BufEnter * execute ":silent! lcd " . escape(expand("%:p:h"), ' ')
-"endif
-
-""""""""""""""""""""""""""""""
-"Windows‚Å“à•”ƒGƒ“ƒR[ƒfƒBƒ“ƒO‚ªcp932ˆÈŠO‚Ìê‡
-"make‚ÌƒƒbƒZ[ƒW‚ª‰»‚¯‚é‚Ì‚ğ‰ñ”ğ
-""""""""""""""""""""""""""""""
-"if has('win32') || has('win64') || has('win95') || has('win16')
-"  au QuickfixCmdPost make call QFixCnv('cp932')
-"endif
+scriptencoding utf-8
+" vim:set ts=8 sts=2 sw=2 tw=0: (ã“ã®è¡Œã«é–¢ã—ã¦ã¯:help modelineã‚’å‚ç…§)
 "
-"function! QFixCnv(enc)
-"  if a:enc == &enc
-"    return
-"  endif
-"  let qflist = getqflist()
-"  for i in qflist
-"    let i.text = iconv(i.text, a:enc, &enc)
-"  endfor
-"  call setqflist(qflist)
-"endfunction
+" An example for a Japanese version vimrc file.
+" æ—¥æœ¬èªç‰ˆã®ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆè¨­å®šãƒ•ã‚¡ã‚¤ãƒ«(vimrc) - Vim 7.4
+"
+" Last Change: 13-Sep-2016.
+" Maintainer:  MURAOKA Taro <koron.kaoriya@gmail.com>
+"
+" è§£èª¬:
+" ã“ã®ãƒ•ã‚¡ã‚¤ãƒ«ã«ã¯Vimã®èµ·å‹•æ™‚ã«å¿…ãšè¨­å®šã•ã‚Œã‚‹ã€ç·¨é›†æ™‚ã®æŒ™å‹•ã«é–¢ã™ã‚‹è¨­å®šãŒæ›¸
+" ã‹ã‚Œã¦ã„ã¾ã™ã€‚GUIã«é–¢ã™ã‚‹è¨­å®šã¯gvimrcã«æ›¸ã‹ã‹ã‚Œã¦ã„ã¾ã™ã€‚
+"
+" å€‹äººç”¨è¨­å®šã¯_vimrcã¨ã„ã†ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ä½œæˆã—ãã“ã§è¡Œãªã„ã¾ã™ã€‚_vimrcã¯ã“ã®ãƒ•ã‚¡
+" ã‚¤ãƒ«ã®å¾Œã«èª­è¾¼ã¾ã‚Œã‚‹ãŸã‚ã€ã“ã“ã«æ›¸ã‹ã‚ŒãŸå†…å®¹ã‚’ä¸Šæ›¸ãã—ã¦è¨­å®šã™ã‚‹ã“ã¨ãŒå‡ºæ¥
+" ã¾ã™ã€‚_vimrcã¯$HOMEã¾ãŸã¯$VIMã«ç½®ã„ã¦ãŠãå¿…è¦ãŒã‚ã‚Šã¾ã™ã€‚$HOMEã¯$VIMã‚ˆã‚Šã‚‚
+" å„ªå…ˆã•ã‚Œã€$HOMEã§ã¿ã¤ã‹ã£ãŸå ´åˆ$VIMã¯èª­è¾¼ã¾ã‚Œã¾ã›ã‚“ã€‚
+"
+" ç®¡ç†è€…å‘ã‘ã«æœ¬è¨­å®šãƒ•ã‚¡ã‚¤ãƒ«ã‚’ç›´æ¥æ›¸ãæ›ãˆãšã«æ¸ˆã¾ã›ã‚‹ã“ã¨ã‚’ç›®çš„ã¨ã—ã¦ã€ã‚µã‚¤
+" ãƒˆãƒ­ãƒ¼ã‚«ãƒ«ãªè¨­å®šã‚’åˆ¥ãƒ•ã‚¡ã‚¤ãƒ«ã§è¡Œãªãˆã‚‹ã‚ˆã†ã«é…æ…®ã—ã¦ã‚ã‚Šã¾ã™ã€‚Vimèµ·å‹•æ™‚ã«
+" ã‚µã‚¤ãƒˆãƒ­ãƒ¼ã‚«ãƒ«ãªè¨­å®šãƒ•ã‚¡ã‚¤ãƒ«($VIM/vimrc_local.vim)ãŒå­˜åœ¨ã™ã‚‹ãªã‚‰ã°ã€æœ¬è¨­å®š
+" ãƒ•ã‚¡ã‚¤ãƒ«ã®ä¸»è¦éƒ¨åˆ†ãŒèª­ã¿è¾¼ã¾ã‚Œã‚‹å‰ã«è‡ªå‹•çš„ã«èª­ã¿è¾¼ã¿ã¾ã™ã€‚
+"
+" èª­ã¿è¾¼ã¿å¾Œã€å¤‰æ•°g:vimrc_local_finishãŒé0ã®å€¤ã«è¨­å®šã•ã‚Œã¦ã„ãŸå ´åˆã«ã¯æœ¬è¨­
+" å®šãƒ•ã‚¡ã‚¤ãƒ«ã«æ›¸ã‹ã‚ŒãŸå†…å®¹ã¯ä¸€åˆ‡å®Ÿè¡Œã•ã‚Œã¾ã›ã‚“ã€‚ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆå‹•ä½œã‚’å…¨ã¦å·®ã—æ›¿ãˆ
+" ãŸã„å ´åˆã«åˆ©ç”¨ã—ã¦ä¸‹ã•ã„ã€‚
+"
+" å‚è€ƒ:
+"   :help vimrc
+"   :echo $HOME
+"   :echo $VIM
+"   :version
 
-"----------------------------------------
-" Šeíƒvƒ‰ƒOƒCƒ“İ’è
-"----------------------------------------
-set nocompatible               " Be iMproved
-filetype plugin indent off
-
-if has('vim_starting')
-  set runtimepath+=$HOME/dotfiles/vimfiles/bundle/neobundle.vim/
-  let $DOTVIM = expand('$HOME/dotfiles/vimfiles/bundle/')
+"---------------------------------------------------------------------------
+" ã‚µã‚¤ãƒˆãƒ­ãƒ¼ã‚«ãƒ«ãªè¨­å®š($VIM/vimrc_local.vim)ãŒã‚ã‚Œã°èª­ã¿è¾¼ã‚€ã€‚èª­ã¿è¾¼ã‚“ã å¾Œã«
+" å¤‰æ•°g:vimrc_local_finishã«é0ãªå€¤ãŒè¨­å®šã•ã‚Œã¦ã„ãŸå ´åˆã«ã¯ã€ãã‚Œä»¥ä¸Šã®è¨­å®š
+" ãƒ•ã‚¡ã‚¤ãƒ«ã®èª­è¾¼ã‚’ä¸­æ­¢ã™ã‚‹ã€‚
+if 1 && filereadable($VIM . '/vimrc_local.vim')
+  unlet! g:vimrc_local_finish
+  source $VIM/vimrc_local.vim
+  if exists('g:vimrc_local_finish') && g:vimrc_local_finish != 0
+    finish
+  endif
 endif
 
-call neobundle#begin('$DOTVIM')
-
-" Installation check.
-if neobundle#exists_not_installed_bundles()
-  echomsg 'Not installed bundles : ' .
-  \ string(neobundle#get_not_installed_bundle_names())
-  echomsg 'Please execute ":NeoBundleInstall" command.'
-  "finish
+"---------------------------------------------------------------------------
+" ãƒ¦ãƒ¼ã‚¶å„ªå…ˆè¨­å®š($HOME/.vimrc_first.vim)ãŒã‚ã‚Œã°èª­ã¿è¾¼ã‚€ã€‚èª­ã¿è¾¼ã‚“ã å¾Œã«å¤‰æ•°
+" g:vimrc_first_finishã«é0ãªå€¤ãŒè¨­å®šã•ã‚Œã¦ã„ãŸå ´åˆã«ã¯ã€ãã‚Œä»¥ä¸Šã®è¨­å®šãƒ•ã‚¡
+" ã‚¤ãƒ«ã®èª­è¾¼ã‚’ä¸­æ­¢ã™ã‚‹ã€‚
+if 1 && exists('$HOME') && filereadable($HOME . '/.vimrc_first.vim')
+  unlet! g:vimrc_first_finish
+  source $HOME/.vimrc_first.vim
+  if exists('g:vimrc_first_finish') && g:vimrc_first_finish != 0
+    finish
+  endif
 endif
 
-" Let NeoBundle manage NeoBundle
-NeoBundleFetch 'Shougo/neobundle.vim'
-NeoBundle 'Shougo/vimproc'
-NeoBundle 'Shougo/unite.vim'
+" pluginsä¸‹ã®ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã‚’runtimepathã¸è¿½åŠ ã™ã‚‹ã€‚
+for s:path in split(glob($VIM.'/plugins/*'), '\n')
+  if s:path !~# '\~$' && isdirectory(s:path)
+    let &runtimepath = &runtimepath.','.s:path
+  end
+endfor
+unlet s:path
 
-NeoBundle 'Shougo/neocomplete.vim'
-NeoBundle 'surround.vim'
-NeoBundle 'ref.vim'
-NeoBundle 'thinca/vim-quickrun'
+"---------------------------------------------------------------------------
+" æ—¥æœ¬èªå¯¾å¿œã®ãŸã‚ã®è¨­å®š:
+"
+" ãƒ•ã‚¡ã‚¤ãƒ«ã‚’èª­è¾¼ã‚€æ™‚ã«ãƒˆãƒ©ã‚¤ã™ã‚‹æ–‡å­—ã‚¨ãƒ³ã‚³ãƒ¼ãƒ‰ã®é †åºã‚’ç¢ºå®šã™ã‚‹ã€‚æ¼¢å­—ã‚³ãƒ¼ãƒ‰è‡ª
+" å‹•åˆ¤åˆ¥æ©Ÿèƒ½ã‚’åˆ©ç”¨ã™ã‚‹å ´åˆã«ã¯åˆ¥é€”iconv.dllãŒå¿…è¦ã€‚iconv.dllã«ã¤ã„ã¦ã¯
+" README_w32j.txtã‚’å‚ç…§ã€‚ãƒ¦ãƒ¼ãƒ†ã‚£ãƒªãƒ†ã‚£ã‚¹ã‚¯ãƒªãƒ—ãƒˆã‚’èª­ã¿è¾¼ã‚€ã“ã¨ã§è¨­å®šã•ã‚Œã‚‹ã€‚
+source $VIM/plugins/kaoriya/encode_japan.vim
+" ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’æ—¥æœ¬èªã«ã™ã‚‹ (Windowsã§ã¯è‡ªå‹•çš„ã«åˆ¤æ–­ãƒ»è¨­å®šã•ã‚Œã¦ã„ã‚‹)
+if !(has('win32') || has('mac')) && has('multi_lang')
+  if !exists('$LANG') || $LANG.'X' ==# 'X'
+    if !exists('$LC_CTYPE') || $LC_CTYPE.'X' ==# 'X'
+      language ctype ja_JP.eucJP
+    endif
+    if !exists('$LC_MESSAGES') || $LC_MESSAGES.'X' ==# 'X'
+      language messages ja_JP.eucJP
+    endif
+  endif
+endif
+" MacOS Xãƒ¡ãƒ‹ãƒ¥ãƒ¼ã®æ—¥æœ¬èªåŒ– (ãƒ¡ãƒ‹ãƒ¥ãƒ¼è¡¨ç¤ºå‰ã«è¡Œãªã†å¿…è¦ãŒã‚ã‚‹)
+if has('mac')
+  set langmenu=japanese
+endif
+" æ—¥æœ¬èªå…¥åŠ›ç”¨ã®keymapã®è¨­å®šä¾‹ (ã‚³ãƒ¡ãƒ³ãƒˆã‚¢ã‚¦ãƒˆ)
+if has('keymap')
+  " ãƒ­ãƒ¼ãƒå­—ä»®åã®keymap
+  "silent! set keymap=japanese
+  "set iminsert=0 imsearch=0
+endif
+" éGUIæ—¥æœ¬èªã‚³ãƒ³ã‚½ãƒ¼ãƒ«ã‚’ä½¿ã£ã¦ã„ã‚‹å ´åˆã®è¨­å®š
+if !has('gui_running') && &encoding != 'cp932' && &term == 'win32'
+  set termencoding=cp932
+endif
 
-NeoBundle 'petdance/vim-perl'
-NeoBundle 'hotchpotch/perldoc-vim'
+set fileencodings=iso-2022-jp,cp932,sjis,euc-jp,utf-8
 
-call neobundle#end()
+"---------------------------------------------------------------------------
+" ãƒ¡ãƒ‹ãƒ¥ãƒ¼ãƒ•ã‚¡ã‚¤ãƒ«ãŒå­˜åœ¨ã—ãªã„å ´åˆã¯äºˆã‚'guioptions'ã‚’èª¿æ•´ã—ã¦ãŠã
+if 1 && !filereadable($VIMRUNTIME . '/menu.vim') && has('gui_running')
+  set guioptions+=M
+endif
 
-syntax on
-filetype on
-filetype plugin indent on   " Required!
+"---------------------------------------------------------------------------
+" Bramæ°ã®æä¾›ã™ã‚‹è¨­å®šä¾‹ã‚’ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰ (åˆ¥ãƒ•ã‚¡ã‚¤ãƒ«:vimrc_example.vim)ã€‚ã“ã‚Œ
+" ä»¥å‰ã«g:no_vimrc_exampleã«é0ãªå€¤ã‚’è¨­å®šã—ã¦ãŠã‘ã°ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰ã¯ã—ãªã„ã€‚
+if 1 && (!exists('g:no_vimrc_example') || g:no_vimrc_example == 0)
+  if &guioptions !~# "M"
+    " vimrc_example.vimã‚’èª­ã¿è¾¼ã‚€æ™‚ã¯guioptionsã«Mãƒ•ãƒ©ã‚°ã‚’ã¤ã‘ã¦ã€syntax on
+    " ã‚„filetype plugin onãŒå¼•ãèµ·ã“ã™menu.vimã®èª­ã¿è¾¼ã¿ã‚’é¿ã‘ã‚‹ã€‚ã“ã†ã—ãªã„
+    " ã¨encã«å¯¾å¿œã™ã‚‹ãƒ¡ãƒ‹ãƒ¥ãƒ¼ãƒ•ã‚¡ã‚¤ãƒ«ãŒèª­ã¿è¾¼ã¾ã‚Œã¦ã—ã¾ã„ã€ã“ã‚Œã®å¾Œã§èª­ã¿è¾¼
+    " ã¾ã‚Œã‚‹.vimrcã§encãŒè¨­å®šã•ã‚ŒãŸå ´åˆã«ãã®è¨­å®šãŒåæ˜ ã•ã‚Œãšãƒ¡ãƒ‹ãƒ¥ãƒ¼ãŒæ–‡å­—
+    " åŒ–ã‘ã¦ã—ã¾ã†ã€‚
+    set guioptions+=M
+    source $VIMRUNTIME/vimrc_example.vim
+    set guioptions-=M
+  else
+    source $VIMRUNTIME/vimrc_example.vim
+  endif
+endif
 
-NeoBundleCheck
+"---------------------------------------------------------------------------
+" æ¤œç´¢ã®æŒ™å‹•ã«é–¢ã™ã‚‹è¨­å®š:
+"
+" æ¤œç´¢æ™‚ã«å¤§æ–‡å­—å°æ–‡å­—ã‚’ç„¡è¦– (noignorecase:ç„¡è¦–ã—ãªã„)
+set ignorecase
+" å¤§æ–‡å­—å°æ–‡å­—ã®ä¸¡æ–¹ãŒå«ã¾ã‚Œã¦ã„ã‚‹å ´åˆã¯å¤§æ–‡å­—å°æ–‡å­—ã‚’åŒºåˆ¥
+set smartcase
+
+"---------------------------------------------------------------------------
+" ç·¨é›†ã«é–¢ã™ã‚‹è¨­å®š:
+"
+" ã‚¿ãƒ–ã®ç”»é¢ä¸Šã§ã®å¹…
+set tabstop=4
+" ã‚¿ãƒ–ã‚’ã‚¹ãƒšãƒ¼ã‚¹ã«å±•é–‹ã—ãªã„ (expandtab:å±•é–‹ã™ã‚‹)
+set noexpandtab
+" è‡ªå‹•çš„ã«ã‚¤ãƒ³ãƒ‡ãƒ³ãƒˆã™ã‚‹ (noautoindent:ã‚¤ãƒ³ãƒ‡ãƒ³ãƒˆã—ãªã„)
+set autoindent
+" ãƒãƒƒã‚¯ã‚¹ãƒšãƒ¼ã‚¹ã§ã‚¤ãƒ³ãƒ‡ãƒ³ãƒˆã‚„æ”¹è¡Œã‚’å‰Šé™¤ã§ãã‚‹ã‚ˆã†ã«ã™ã‚‹
+set backspace=indent,eol,start
+" æ¤œç´¢æ™‚ã«ãƒ•ã‚¡ã‚¤ãƒ«ã®æœ€å¾Œã¾ã§è¡Œã£ãŸã‚‰æœ€åˆã«æˆ»ã‚‹ (nowrapscan:æˆ»ã‚‰ãªã„)
+set wrapscan
+" æ‹¬å¼§å…¥åŠ›æ™‚ã«å¯¾å¿œã™ã‚‹æ‹¬å¼§ã‚’è¡¨ç¤º (noshowmatch:è¡¨ç¤ºã—ãªã„)
+set showmatch
+" ã‚³ãƒãƒ³ãƒ‰ãƒ©ã‚¤ãƒ³è£œå®Œã™ã‚‹ã¨ãã«å¼·åŒ–ã•ã‚ŒãŸã‚‚ã®ã‚’ä½¿ã†(å‚ç…§ :help wildmenu)
+set wildmenu
+" ãƒ†ã‚­ã‚¹ãƒˆæŒ¿å…¥ä¸­ã®è‡ªå‹•æŠ˜ã‚Šè¿”ã—ã‚’æ—¥æœ¬èªã«å¯¾å¿œã•ã›ã‚‹
+set formatoptions+=mM
+
+"---------------------------------------------------------------------------
+" GUIå›ºæœ‰ã§ã¯ãªã„ç”»é¢è¡¨ç¤ºã®è¨­å®š:
+"
+" è¡Œç•ªå·ã‚’éè¡¨ç¤º (number:è¡¨ç¤º)
+"set nonumber
+set number
+" ãƒ«ãƒ¼ãƒ©ãƒ¼ã‚’è¡¨ç¤º (noruler:éè¡¨ç¤º)
+set ruler
+" ã‚¿ãƒ–ã‚„æ”¹è¡Œã‚’è¡¨ç¤º (list:è¡¨ç¤º)
+set nolist
+" ã©ã®æ–‡å­—ã§ã‚¿ãƒ–ã‚„æ”¹è¡Œã‚’è¡¨ç¤ºã™ã‚‹ã‹ã‚’è¨­å®š
+"set listchars=tab:>-,extends:<,trail:-,eol:<
+" é•·ã„è¡Œã‚’æŠ˜ã‚Šè¿”ã—ã¦è¡¨ç¤º (nowrap:æŠ˜ã‚Šè¿”ã•ãªã„)
+set wrap
+" å¸¸ã«ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹è¡Œã‚’è¡¨ç¤º (è©³ç´°ã¯:he laststatus)
+set laststatus=2
+" ã‚³ãƒãƒ³ãƒ‰ãƒ©ã‚¤ãƒ³ã®é«˜ã• (Windowsç”¨gvimä½¿ç”¨æ™‚ã¯gvimrcã‚’ç·¨é›†ã™ã‚‹ã“ã¨)
+set cmdheight=2
+" ã‚³ãƒãƒ³ãƒ‰ã‚’ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹è¡Œã«è¡¨ç¤º
+set showcmd
+" ã‚¿ã‚¤ãƒˆãƒ«ã‚’è¡¨ç¤º
+set title
+" ç”»é¢ã‚’é»’åœ°ã«ç™½ã«ã™ã‚‹ (æ¬¡è¡Œã®å…ˆé ­ã® " ã‚’å‰Šé™¤ã™ã‚Œã°æœ‰åŠ¹ã«ãªã‚‹)
+"colorscheme evening " (Windowsç”¨gvimä½¿ç”¨æ™‚ã¯gvimrcã‚’ç·¨é›†ã™ã‚‹ã“ã¨)
+
+"---------------------------------------------------------------------------
+" ãƒ•ã‚¡ã‚¤ãƒ«æ“ä½œã«é–¢ã™ã‚‹è¨­å®š:
+"
+" ãƒãƒƒã‚¯ã‚¢ãƒƒãƒ—ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ä½œæˆã—ãªã„ (æ¬¡è¡Œã®å…ˆé ­ã® " ã‚’å‰Šé™¤ã™ã‚Œã°æœ‰åŠ¹ã«ãªã‚‹)
+set nobackup
+"undoãƒ•ã‚¡ã‚¤ãƒ«æ ¼ç´å…ˆ
+set undodir=$HOME/AppData/Local/Temp/
+
+"---------------------------------------------------------------------------
+" ãƒ•ã‚¡ã‚¤ãƒ«åã«å¤§æ–‡å­—å°æ–‡å­—ã®åŒºåˆ¥ãŒãªã„ã‚·ã‚¹ãƒ†ãƒ ç”¨ã®è¨­å®š:
+"   (ä¾‹: DOS/Windows/MacOS)
+"
+if filereadable($VIM . '/vimrc') && filereadable($VIM . '/ViMrC')
+  " tagsãƒ•ã‚¡ã‚¤ãƒ«ã®é‡è¤‡é˜²æ­¢
+  set tags=./tags,tags
+endif
+
+"---------------------------------------------------------------------------
+" ã‚³ãƒ³ã‚½ãƒ¼ãƒ«ã§ã®ã‚«ãƒ©ãƒ¼è¡¨ç¤ºã®ãŸã‚ã®è¨­å®š(æš«å®šçš„ã«UNIXå°‚ç”¨)
+if has('unix') && !has('gui_running')
+  let s:uname = system('uname')
+  if s:uname =~? "linux"
+    set term=builtin_linux
+  elseif s:uname =~? "freebsd"
+    set term=builtin_cons25
+  elseif s:uname =~? "Darwin"
+    set term=beos-ansi
+  else
+    set term=builtin_xterm
+  endif
+  unlet s:uname
+endif
+
+"---------------------------------------------------------------------------
+" ã‚³ãƒ³ã‚½ãƒ¼ãƒ«ç‰ˆã§ç’°å¢ƒå¤‰æ•°$DISPLAYãŒè¨­å®šã•ã‚Œã¦ã„ã‚‹ã¨èµ·å‹•ãŒé…ããªã‚‹ä»¶ã¸å¯¾å¿œ
+if !has('gui_running') && has('xterm_clipboard')
+  set clipboard=exclude:cons\\\|linux\\\|cygwin\\\|rxvt\\\|screen
+endif
+
+"---------------------------------------------------------------------------
+" ãƒ—ãƒ©ãƒƒãƒˆãƒ›ãƒ¼ãƒ ä¾å­˜ã®ç‰¹åˆ¥ãªè¨­å®š
+
+" Winã§ã¯PATHã«$VIMãŒå«ã¾ã‚Œã¦ã„ãªã„ã¨ãã«exeã‚’è¦‹ã¤ã‘å‡ºã›ãªã„ã®ã§ä¿®æ­£
+if has('win32') && $PATH !~? '\(^\|;\)' . escape($VIM, '\\') . '\(;\|$\)'
+  let $PATH = $VIM . ';' . $PATH
+endif
+
+if has('mac')
+  " Macã§ã¯ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã®'iskeyword'ãŒcp932ã«å¯¾å¿œã—ãã‚Œã¦ã„ãªã„ã®ã§ä¿®æ­£
+  set iskeyword=@,48-57,_,128-167,224-235
+endif
+
+"---------------------------------------------------------------------------
+" KaoriYaã§ãƒãƒ³ãƒ‰ãƒ«ã—ã¦ã„ã‚‹ãƒ—ãƒ©ã‚°ã‚¤ãƒ³ã®ãŸã‚ã®è¨­å®š
+
+" autofmt: æ—¥æœ¬èªæ–‡ç« ã®ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆ(æŠ˜ã‚Šè¿”ã—)ãƒ—ãƒ©ã‚°ã‚¤ãƒ³.
+set formatexpr=autofmt#japanese#formatexpr()
+
+" vimdoc-ja: æ—¥æœ¬èªãƒ˜ãƒ«ãƒ—ã‚’ç„¡åŠ¹åŒ–ã™ã‚‹.
+if kaoriya#switch#enabled('disable-vimdoc-ja')
+  let &rtp = join(filter(split(&rtp, ','), 'v:val !~ "[/\\\\]plugins[/\\\\]vimdoc-ja"'), ',')
+endif
+
+" vimproc: åŒæ¢±ã®vimprocã‚’ç„¡åŠ¹åŒ–ã™ã‚‹
+if kaoriya#switch#enabled('disable-vimproc')
+  let &rtp = join(filter(split(&rtp, ','), 'v:val !~ "[/\\\\]plugins[/\\\\]vimproc$"'), ',')
+endif
+
+" go-extra: åŒæ¢±ã® vim-go-extra ã‚’ç„¡åŠ¹åŒ–ã™ã‚‹
+if kaoriya#switch#enabled('disable-go-extra')
+  let &rtp = join(filter(split(&rtp, ','), 'v:val !~ "[/\\\\]plugins[/\\\\]golang$"'), ',')
+endif
+
+" Copyright (C) 2009-2016 KaoriYa/MURAOKA Taro
+
+" qã§Quickfixã‚’é–‰ã˜ã‚‹
+au FileType qf nnoremap <silent><buffer>q :quit<CR>
 
 "----------------------------------------
-" neocomplete.vim
+" å„ç¨®ãƒ—ãƒ©ã‚°ã‚¤ãƒ³è¨­å®š
 "----------------------------------------
-"Note: This option must set it in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!
+if &compatible
+  set nocompatible
+endif
+set runtimepath+=$VIM./dotfiles/repos/github.com/Shougo/dein.vim
+
+call dein#begin(expand($VIM.'./dein'))
+
+call dein#add('Shougo/dein.vim')
+call dein#add('Shougo/unite.vim')
+call dein#add('Shougo/vimfiler')
+call dein#add('Shougo/neocomplete.vim')
+call dein#add('surround.vim')
+call dein#add('ref.vim')
+call dein#add('thinca/vim-quickrun')
+call dein#add('petdance/vim-perl')
+call dein#add('hotchpotch/perldoc-vim')
+call dein#add('plasticboy/vim-markdown')
+call dein#add('kannokanno/previm')
+call dein#add('tyru/open-browser.vim')
+
+call dein#add('derekwyatt/vim-scala')
+
+call dein#end()
+
+filetype plugin indent on
+""----------------------------------------
+"" vimfiler
+""----------------------------------------
+noremap <C-X><C-T> :VimFiler -split -simple -winwidth=45 -no-quit<ENTER>
+
+""----------------------------------------
+"" vim-quickrun
+""----------------------------------------
+nmap <Leader>r <plug>(quickrun)
+let g:quickrun_config = get(g:, 'quickrun_config', {})
+let g:quickrun_config._ = {
+      \ 'outputter' : 'error',
+      \ 'outputter/error/success' : 'buffer',
+      \ 'outputter/error/error'   : 'quickfix',
+      \ "outputter/buffer/split" : ":botright 8sp",
+      \ 'outputter/buffer/close_on_empty' : 1,
+      \ "runner" : "vimproc",
+      \ "runner/vimproc/updatetime" : 40,
+      \ }
+
+""----------------------------------------
+"" neoComplete
+""----------------------------------------
 " Disable AutoComplPop.
 let g:acp_enableAtStartup = 0
 " Use neocomplete.
@@ -411,14 +316,15 @@ let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
 
 " Define dictionary.
 let g:neocomplete#sources#dictionary#dictionaries = {
-  \ 'default' : '',
-  \ 'vimshell' : $HOME.'/.vimshell_hist',
-  \ 'scheme' : $HOME.'/.gosh_completions'
-\ }
+    \ 'default' : '',
+    \ 'vimshell' : $HOME.'/.vimshell_hist',
+    \ 'scheme' : $HOME.'/.gosh_completions',
+    \ 'scala' : $VIM.'/dotfiles/dict/scala.dict',
+    \ }
 
 " Define keyword.
 if !exists('g:neocomplete#keyword_patterns')
-  let g:neocomplete#keyword_patterns = {}
+    let g:neocomplete#keyword_patterns = {}
 endif
 let g:neocomplete#keyword_patterns['default'] = '\h\w*'
 
@@ -430,18 +336,26 @@ inoremap <expr><C-l>     neocomplete#complete_common_string()
 " <CR>: close popup and save indent.
 inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
 function! s:my_cr_function()
-  return neocomplete#close_popup() . "\<CR>"
+  return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
   " For no inserting <CR> key.
-  "return pumvisible() ? neocomplete#close_popup() : "\<CR>"
+  "return pumvisible() ? "\<C-y>" : "\<CR>"
 endfunction
-
 " <TAB>: completion.
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 " <C-h>, <BS>: close popup and delete backword char.
 inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
 inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
-inoremap <expr><C-y>  neocomplete#close_popup()
-inoremap <expr><C-e>  neocomplete#cancel_popup()
+" Close popup by <Space>.
+"inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
+
+" AutoComplPop like behavior.
+"let g:neocomplete#enable_auto_select = 1
+
+" Shell like behavior(not recommended).
+"set completeopt+=longest
+"let g:neocomplete#enable_auto_select = 1
+"let g:neocomplete#disable_auto_complete = 1
+"inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
 
 " Enable omni completion.
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
@@ -462,11 +376,10 @@ endif
 " https://github.com/c9s/perlomni.vim
 let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
 
-"----------------------------------------
-" vim-quickrun
-"----------------------------------------
-nmap <Leader>r <plug>(quickrun)
+""----------------------------------------
+"" vim-markdown
+""----------------------------------------
+au BufRead,BufNewFile *.md set filetype=markdown
+let g:previm_open_cmd = 'C:\\Program\ Files\\Google\\Chrome\\Application\\chrome.exe' "'open -a Firefox'
+let g:vim_markdown_folding_disabled = 1
 
-"----------------------------------------
-" ˆêİ’è
-"----------------------------------------
