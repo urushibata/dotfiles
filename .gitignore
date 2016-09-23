@@ -3,4 +3,5 @@
 *.log
 *_
 *.org
-dien/
+*.un~
+repos/
